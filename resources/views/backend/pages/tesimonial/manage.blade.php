@@ -26,7 +26,7 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->name }}</td>
                                 <td>{{ $item->desig }}</td>
-                                <td>{{ $item->service }}</td>
+                                <td>{{ $item->cleaning->name ?? '' }}</td>
                                 <td>{{ $item->review }}</td>
                                 <td>
                                     <a href="{{ route('tesimonialedit', $item->id) }}" class="btn btn-warning"><i class='bx bxs-edit'></i></a>

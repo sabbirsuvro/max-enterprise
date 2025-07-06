@@ -29,8 +29,8 @@
                             <div class="col-sm-9">
                                 <select name="service" id="type" class="form-control">
                                     @foreach ($cleaning as $item)
-                                        <option value="{{ $item->name }}"
-                                            {{ $tesimonial->service == $item->name ? 'selected' : '' }}>
+                                        <option value="{{ $item->id }}"
+                                            {{ $tesimonial->service == $item->id ? 'selected' : '' }}>
                                             {{ $item->name }}
                                         </option>
                                     @endforeach

@@ -33,30 +33,28 @@
                 </div>
             </div>
             <div class="row gy-40 justify-content-center">
-@foreach ($video as $item)
-    @php
-        // Extract video ID from full YouTube URL
-        preg_match('/(?:https?:\/\/)?(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-]+)/', $item->embedid, $matches);
-        $videoId = $matches[1] ?? null;
-    @endphp
-
-    @if($videoId)
-        <div class="col-xl-4 col-md-6 mb-4">
-            <div class="video-item position-relative" style="padding-bottom: 56.25%; height: 0; overflow: hidden;">
-                <iframe
-                    src="https://www.youtube.com/embed/{{ $videoId }}"
-                    title="YouTube video player"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen
-                    style="position: absolute; top:0; left:0; width:100%; height:100%;">
-                </iframe>
-            </div>
-        </div>
-    @endif
-@endforeach
-
-
+                @foreach ($video as $item)
+                    @php
+                        preg_match(
+                            '/(?:https?:\/\/)?(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-]+)/',
+                            $item->embedid,
+                            $matches,
+                        );
+                        $videoId = $matches[1] ?? null;
+                    @endphp
+                    @if ($videoId)
+                        <div class="col-xl-4 col-md-6 mb-4">
+                            <div class="video-item position-relative"
+                                style="padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                                <iframe src="https://www.youtube.com/embed/{{ $videoId }}" title="YouTube video player"
+                                    frameborder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                    allowfullscreen style="position: absolute; top:0; left:0; width:100%; height:100%;">
+                                </iframe>
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
             </div>
         </div>
     </section>

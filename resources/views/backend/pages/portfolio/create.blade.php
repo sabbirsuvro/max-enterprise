@@ -20,7 +20,7 @@
                             <div class="col-sm-9">
                                 <select name="service" id="type" class="form-control">
                                     @foreach ($cleaning as $item)
-                                    <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
                                     @endforeach
                                 </select>
                             </div>

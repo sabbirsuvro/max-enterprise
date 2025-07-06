@@ -14,4 +14,9 @@ class Tesimonial extends Model
         'service',
         'review',
     ];
+
+    public function cleaning()
+    {
+        return $this->belongsTo(Cleaning::class, 'service');
+    }
 }

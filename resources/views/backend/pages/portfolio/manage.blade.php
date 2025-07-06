@@ -24,7 +24,7 @@
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $item->title }}</td>
-                                <td>{{ $item->service }}</td>
+                                <td>{{ $item->cleaning->name ?? '' }}</td>
                                 <td>
                                     <img src="{{ asset('image/portfolio/' .$item->img) }}" alt="" width="150">
                                 </td>

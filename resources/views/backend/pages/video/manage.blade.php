@@ -22,7 +22,6 @@
                         @foreach ($video as $item)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                {{-- <td>{{ $item->service }}</td> --}}
                                 <td>{{ $item->cleaning->name ?? '' }}</td>
                                 <td>{{ $item->embedid }}</td>
                                 <td>

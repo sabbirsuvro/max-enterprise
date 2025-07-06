@@ -13,5 +13,10 @@ class Portfolio extends Model
         'service',
         'img',
     ];
+
+    public function cleaning()
+    {
+        return $this->belongsTo(Cleaning::class, 'service');
+    }
 }
 
