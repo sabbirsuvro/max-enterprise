@@ -97,21 +97,4 @@
         </div>
     </div>
 @endsection
-@push('js')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const links = document.querySelectorAll('.open-modal');
-            const modalImage = document.getElementById('modalImage');
 
-            links.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const imgSrc = this.getAttribute('data-img');
-                    modalImage.src = imgSrc;
-                    const modal = new bootstrap.Modal(document.getElementById('imageModal'));
-                    modal.show();
-                });
-            });
-        });
-    </script>
-@endpush

@@ -72,6 +72,14 @@
                 text-overflow: ellipsis;
                 white-space: normal;
             }
+            .sevenline {
+                display: -webkit-box;
+                -webkit-line-clamp: 7;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: normal;
+            }
         </style>
         @stack('css')
     </head>
@@ -283,6 +291,7 @@
                                         <li><a href="{{ route('testimonial') }}">Testimonial</a></li>
                                         <li><a href="{{ route('contact') }}">Contact Us</a></li>
                                         <li><a href="{{ route('blog') }}">Blog</a></li>
+                                        <li><a href="{{ route('video') }}">Project Video</a></li>
                                     </ul>
                                 </div>
                             </div>

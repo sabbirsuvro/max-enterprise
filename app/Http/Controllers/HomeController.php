@@ -7,7 +7,8 @@ use App\Models\Hero;
 use App\Models\Cleaning;
 use App\Models\About;
 use App\Models\Portfolio;
-// use App\Models\Manpower;
+use App\Models\Tesimonial;
+use App\Models\Video;
 
 
 class HomeController extends Controller
@@ -33,7 +34,10 @@ class HomeController extends Controller
         $portfolio = Portfolio::latest()
                      ->take(5)
                      ->get();
-        return view('frontend.welcome', compact('hero','cleaning','pestcontroll','manpower','blog','portfolio'));
+        $tesimonial = Tesimonial::latest()
+                     ->take(5)
+                     ->get();
+        return view('frontend.welcome', compact('hero','cleaning','pestcontroll','manpower','blog','portfolio','tesimonial'));
     }
 
     public function about(){
@@ -94,7 +98,12 @@ class HomeController extends Controller
     }
 
     public function testimonial(){
-        return view('frontend.pages.testimonial');
+         $tesimonial = Tesimonial::all();
+        return view('frontend.pages.testimonial', compact('tesimonial'));
+    }
+    public function video(){
+         $video = Video::all();
+        return view('frontend.pages.video', compact('video'));
     }
 
 }

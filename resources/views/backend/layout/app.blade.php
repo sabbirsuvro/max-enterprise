@@ -97,7 +97,21 @@
                     <a href="{{ route('portfoliomanage') }}">
                         <div class="parent-icon"><i class='bx bx-home-alt'></i>
                         </div>
-                        <div class="menu-title">Portfolio Manage</div>
+                        <div class="menu-title">Project image Manage</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('tesimonialmanage') }}">
+                        <div class="parent-icon"><i class='bx bx-home-alt'></i>
+                        </div>
+                        <div class="menu-title">Client Review Manage</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('videomanage') }}">
+                        <div class="parent-icon"><i class='bx bx-home-alt'></i>
+                        </div>
+                        <div class="menu-title">Video Manage</div>
                     </a>
                 </li>
 

@@ -8,7 +8,8 @@ use App\Models\Hero;
 use App\Models\Cleaning;
 use App\Models\About;
 use App\Models\Portfolio;
-// use App\Models\Manpower;
+use App\Models\Tesimonial;
+use App\Models\Video;
 
 class AdminController extends Controller
 {
@@ -284,5 +285,122 @@ class AdminController extends Controller
         $post->delete();
         return redirect()->route('portfoliomanage')->with('alert', 'post deleted');
     }
+
+    public function tesimonialmanage(){
+        $tesimonial = Tesimonial::all();
+        return view('backend.pages.tesimonial.manage', compact('tesimonial'));
+    }
+
+    public function tesimonialcreate(){
+        $cleaning = Cleaning::whereIn('type', ['cleaning_service', 'pestcontrol_service', 'manpower_service'])
+                    ->latest()
+                    ->get();
+
+        return view('backend.pages.tesimonial.create', compact('cleaning'));
+    }
+
+    public function tesimonialstore(Request $request) {
+
+        $validated = $request->validate([
+            'name' => 'nullable',
+            'desig' => 'nullable',
+            'service' => 'nullable',
+            'review' => 'nullable',
+        ]);
+
+        $input = $request->all();
+
+        Tesimonial::create($input);
+
+        return redirect()->route('tesimonialmanage')->with('alert', 'post created');
+    }
+
+    public function tesimonialedit($id) {
+        $tesimonial = Tesimonial::findorfail($id);
+        $cleaning = Cleaning::whereIn('type', ['cleaning_service', 'pestcontrol_service', 'manpower_service'])
+                    ->latest()
+                    ->get();
+        return view('backend.pages.tesimonial.edit', compact('tesimonial','cleaning')) ;
+    }
+
+    public function tesimonialupdate($id, Request $request) {
+
+        $post = Tesimonial::findorfail($id);
+        $validated = $request->validate([
+            'name' => 'nullable',
+            'desig' => 'nullable',
+            'service' => 'nullable',
+            'review' => 'nullable',
+        ]);
+
+        $input = $request->all();
+        $post->update($input);
+
+        return redirect()->route('tesimonialmanage')->with('alert', 'post updated');
+    }
+
+    public function tesimonialdelete($id) {
+        $post = Tesimonial::findorfail($id);
+        $post->delete();
+        return redirect()->route('tesimonialmanage')->with('alert', 'post deleted');
+    }
+
+    public function videomanage(){
+        $video = Video::with('cleaning')->get();
+        // dd($video);
+        return view('backend.pages.video.manage', compact('video'));
+    }
+
+    public function videocreate(){
+        $cleaning = Cleaning::whereIn('type', ['cleaning_service', 'pestcontrol_service', 'manpower_service'])
+                    ->latest()
+                    ->get();
+
+        return view('backend.pages.video.create', compact('cleaning'));
+    }
+
+    public function videostore(Request $request) {
+
+        $validated = $request->validate([
+            'service' => 'nullable',
+            'embedid' => 'nullable',
+        ]);
+
+        $input = $request->all();
+
+        Video::create($input);
+
+        return redirect()->route('videomanage')->with('alert', 'post created');
+    }
+
+    public function videoedit($id) {
+        $video = Video::findorfail($id);
+        $cleaning = Cleaning::whereIn('type', ['cleaning_service', 'pestcontrol_service', 'manpower_service'])
+                    ->latest()
+                    ->get();
+        return view('backend.pages.video.edit', compact('video','cleaning')) ;
+    }
+
+    public function videoupdate($id, Request $request) {
+
+        $post = Video::findorfail($id);
+        $validated = $request->validate([
+            'service' => 'nullable',
+            'embedid' => 'nullable',
+        ]);
+
+        $input = $request->all();
+        $post->update($input);
+
+        return redirect()->route('videomanage')->with('alert', 'post updated');
+    }
+
+    public function videodelete($id) {
+        $post = Video::findorfail($id);
+        $post->delete();
+        return redirect()->route('videomanage')->with('alert', 'post deleted');
+    }
+
+
 
 }

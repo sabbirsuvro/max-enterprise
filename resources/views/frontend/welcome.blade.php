@@ -211,6 +211,7 @@
                             <div class="swiper th-slider" id="testiSlide2"
                                 data-slider-options='{"effect":"slide","thumbs":{"swiper":".testi-box-thumb"}}'>
                                 <div class="swiper-wrapper">
+                                    @foreach ($tesimonial as $item)
                                     <div class="swiper-slide">
                                         <div class="testi-box2">
                                             <div class="box-review">
@@ -220,25 +221,16 @@
                                                     class="fa-sharp fa-solid fa-star"></i>
                                                 <i class="fa-sharp fa-solid fa-star"></i>
                                             </div>
-                                            <p class="box-text">
-                                                The clean service I recently received was nothing to an hide for every short
-                                                of exceptional. From the moment they arrived, their a professionalism was
-                                                evident, and they carried out their
-                                                tasks with a utmost precision. Every nook and cranny was thoroughly cleaned,
-                                                leaving my are a space spotless and refreshed. I was thoroughly impressed
-                                                with their attention to detail and
-                                                commitment to ensuring a pristine environment.
-                                            </p>
+                                            <p class="box-text">{!! $item->review !!}</p>
                                             <div class="box-profile">
-                                                <div class="box-img"><img src="frontend/img/testimonial/testi_3_1.jpg"
-                                                        alt="image" /></div>
                                                 <div class="media-body">
-                                                    <h3 class="box-title">David Thompson</h3>
-                                                    <span class="box-desig">Director at Gram</span>
+                                                    <h3 class="box-title">{{ $item->name }}</h3>
+                                                    <span class="box-desig">{{ $item->desig }}</span>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
+                                    @endforeach
                                 </div>
                             </div>
                             <div class="icon-box">
@@ -322,53 +314,7 @@
             </div>
         </div>
     </section>
-    <div class="space-bottom">
-        <div class="shape-mockup moving d-none d-xl-block" data-bottom="0%" data-right="0%"><img
-                src="frontend/img/shape/tool_shape_5.png" alt="shape" /></div>
-        <div class="container">
-            <div class="swiper th-slider" id="brandSlider1"
-                data-slider-options='{"breakpoints":{"0":{"slidesPerView":2},"420":{"slidesPerView":"3"},"768":{"slidesPerView":"4"},"992":{"slidesPerView":"5"},"1200":{"slidesPerView":"6"},"1400":{"slidesPerView":"6"}}}'>
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide">
-                        <div class="brand-card2"><img src="frontend/img/brand/brand_2_1.svg" alt="Brand Logo" /></div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="brand-card2"><img src="frontend/img/brand/brand_2_2.svg" alt="Brand Logo" /></div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="brand-card2"><img src="frontend/img/brand/brand_2_3.svg" alt="Brand Logo" /></div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="brand-card2"><img src="frontend/img/brand/brand_2_4.svg" alt="Brand Logo" /></div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="brand-card2"><img src="frontend/img/brand/brand_2_5.svg" alt="Brand Logo" /></div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="brand-card2"><img src="frontend/img/brand/brand_2_6.svg" alt="Brand Logo" /></div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="brand-card2"><img src="frontend/img/brand/brand_2_1.svg" alt="Brand Logo" /></div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="brand-card2"><img src="frontend/img/brand/brand_2_2.svg" alt="Brand Logo" /></div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="brand-card2"><img src="frontend/img/brand/brand_2_3.svg" alt="Brand Logo" /></div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="brand-card2"><img src="frontend/img/brand/brand_2_4.svg" alt="Brand Logo" /></div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="brand-card2"><img src="frontend/img/brand/brand_2_5.svg" alt="Brand Logo" /></div>
-                    </div>
-                    <div class="swiper-slide">
-                        <div class="brand-card2"><img src="frontend/img/brand/brand_2_6.svg" alt="Brand Logo" /></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
 @endsection
 @push('js')
 @endpush

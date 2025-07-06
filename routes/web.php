@@ -28,6 +28,7 @@ Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('/testimonial', [HomeController::class, 'testimonial'])->name('testimonial');
 Route::get('/project', [HomeController::class, 'portfolio'])->name('portfolio');
+Route::get('/video', [HomeController::class, 'video'])->name('video');
 
 
 Route::middleware(['auth', 'checktype:admin,superadmin'])->group(function () {
@@ -58,12 +59,23 @@ Route::middleware(['auth', 'checktype:admin,superadmin'])->group(function () {
     Route::get('/portfoliodelete/{id}', [AdminController::class, 'portfoliodelete'])->name('portfoliodelete');
 
 
-    // manpowermanage
-    Route::get('/manpowermanage', [AdminController::class, 'manpowermanage'])->name('manpowermanage');
-    Route::get('/manpowercreate', [AdminController::class, 'manpowercreate'])->name('manpowercreate');
-    Route::post('/manpowerstore', [AdminController::class, 'manpowerstore'])->name('manpowerstore');
-    Route::get('/manpoweredit/{id}', [AdminController::class, 'manpoweredit'])->name('manpoweredit');
-    Route::post('/manpowerupdate/{id}', [AdminController::class, 'manpowerupdate'])->name('manpowerupdate');
+    // tesimonialmanage
+    Route::get('/testimonialmanage', [AdminController::class, 'tesimonialmanage'])->name('tesimonialmanage');
+    Route::get('/testimonialcreate', [AdminController::class, 'tesimonialcreate'])->name('tesimonialcreate');
+    Route::post('/testimonialstore', [AdminController::class, 'tesimonialstore'])->name('tesimonialstore');
+    Route::get('/testimonialedit/{id}', [AdminController::class, 'tesimonialedit'])->name('tesimonialedit');
+    Route::post('/testimonialupdate/{id}', [AdminController::class, 'tesimonialupdate'])->name('tesimonialupdate');
+    Route::get('/testimonialdelete/{id}', [AdminController::class, 'testimonialdelete'])->name('testimonialdelete');
+
+
+    // videomanage
+    Route::get('/videomanage', [AdminController::class, 'videomanage'])->name('videomanage');
+    Route::get('/videocreate', [AdminController::class, 'videocreate'])->name('videocreate');
+    Route::post('/videostore', [AdminController::class, 'videostore'])->name('videostore');
+    Route::get('/videoedit/{id}', [AdminController::class, 'videoedit'])->name('videoedit');
+    Route::post('/videoupdate/{id}', [AdminController::class, 'videoupdate'])->name('videoupdate');
+    Route::get('/videodelete/{id}', [AdminController::class, 'videodelete'])->name('videodelete');
+
 
     // about
     Route::get('/aboutmanage', [AdminController::class, 'aboutmanage'])->name('aboutmanage');
