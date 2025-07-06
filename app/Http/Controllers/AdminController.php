@@ -1,0 +1,288 @@
+<?php
+
+namespace App\Http\Controllers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
+use App\Models\Hero;
+use App\Models\Cleaning;
+use App\Models\About;
+use App\Models\Portfolio;
+// use App\Models\Manpower;
+
+class AdminController extends Controller
+{
+    public function dashboard(){
+        return view('backend.dashboard');
+    }
+
+    public function ckupload(Request $request){
+
+        if ($request->hasFile('upload')) {
+            $file = $request->file('upload');
+            $filename = time() . '_' . $file->getClientOriginalName();
+            $path = $file->storeAs('public/uploads', $filename);
+
+            $url = Storage::url($path);
+
+            return response()->json([
+                'uploaded' => true,
+                'url' => $url
+            ]);
+        }
+
+        return response()->json([
+            'uploaded' => false,
+            'error' => [
+                'message' => 'No file uploaded.'
+            ]
+        ]);
+    }
+
+    public function heromanage(){
+        $hero = Hero::first();
+        return view('backend.pages.hero.manage', compact('hero'));
+    }
+
+    public function heroedit($id) {
+        $hero = Hero::findorfail($id);
+        return view('backend.pages.hero.edit', compact('hero')) ;
+    }
+
+    public function heroupdate($id, Request $request) {
+
+        $post = Hero::findorfail($id);
+        $validated = $request->validate([
+            'bgimg' => 'nullable',
+            'img' => 'nullable',
+            'title1' => 'nullable',
+            'title2' => 'nullable',
+            'wave' => 'nullable',
+            'project' => 'nullable',
+            'cleaner' => 'nullable',
+            'customer' => 'nullable',
+
+        ]);
+
+        $input = $request->all();
+
+        if ($image = $request->file('bgimg')) {
+            $destinationPath = 'image/hero/';
+            $profileImage = date('YmdHis') . "_bg." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['bgimg'] = "$profileImage";
+        }else{
+            unset($input['bgimg']);
+        }
+
+        if ($image = $request->file('img')) {
+            $destinationPath = 'image/hero/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['img'] = "$profileImage";
+        }else{
+            unset($input['img']);
+        }
+
+        $post->update($input);
+
+        return redirect()->route('heromanage')->with('alert', 'post updated');
+    }
+
+    public function cleaningmanage(){
+        $cleaning = Cleaning::all();
+        return view('backend.pages.cleaning.manage', compact('cleaning'));
+    }
+
+    public function cleaningcreate(){
+        return view('backend.pages.cleaning.create');
+    }
+
+    public function cleaningstore(Request $request) {
+
+        $validated = $request->validate([
+            'name' => 'nullable',
+            'sdes' => 'nullable',
+            'des' => 'nullable',
+            'img' => 'nullable',
+            'type' => 'nullable',
+        ]);
+
+        $input = $request->all();
+        if ($image = $request->file('img')) {
+            $destinationPath = 'image/cleaning/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['img'] = "$profileImage";
+        }
+        Cleaning::create($input);
+
+        return redirect()->route('cleaningmanage')->with('alert', 'post created');
+    }
+
+    public function cleaningedit($id) {
+        $cleaning = Cleaning::findorfail($id);
+        return view('backend.pages.cleaning.edit', compact('cleaning')) ;
+    }
+
+    public function cleaningupdate($id, Request $request) {
+
+        $post = Cleaning::findorfail($id);
+        $validated = $request->validate([
+            'name' => 'nullable',
+            'sdes' => 'nullable',
+            'des' => 'nullable',
+            'img' => 'nullable',
+            'type' => 'nullable',
+        ]);
+
+        $input = $request->all();
+
+        if ($image = $request->file('img')) {
+            $destinationPath = 'image/cleaning/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['img'] = "$profileImage";
+        }else{
+            unset($input['img']);
+        }
+
+        $post->update($input);
+
+        return redirect()->route('cleaningmanage')->with('alert', 'post updated');
+    }
+
+    public function aboutmanage(){
+        $about = About::first();
+        return view('backend.pages.about.manage', compact('about'));
+    }
+
+    public function aboutedit($id) {
+        $about = About::findorfail($id);
+        return view('backend.pages.about.edit', compact('about')) ;
+    }
+
+    public function aboutupdate($id, Request $request) {
+
+        $post = About::findorfail($id);
+        $validated = $request->validate([
+            'img1' => 'nullable',
+            'img2' => 'nullable',
+            'img3' => 'nullable',
+            'video' => 'nullable',
+            'year' => 'nullable',
+            'des' => 'nullable',
+            'wptitle1' => 'nullable',
+            'wptitle2' => 'nullable',
+            'wptitle3' => 'nullable',
+            'wptitle4' => 'nullable',
+            'wpdes1' => 'nullable',
+            'wpdes2' => 'nullable',
+            'wpdes3' => 'nullable',
+            'wpdes4' => 'nullable',
+        ]);
+
+        $input = $request->all();
+
+        if ($image = $request->file('img1')) {
+            $destinationPath = 'image/about/';
+            $profileImage = date('YmdHis') . "left." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['img1'] = "$profileImage";
+        }else{
+            unset($input['img1']);
+        }
+        if ($image = $request->file('img2')) {
+            $destinationPath = 'image/about/';
+            $profileImage = date('YmdHis') . "vimg." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['img2'] = "$profileImage";
+        }else{
+            unset($input['img2']);
+        }
+        if ($image = $request->file('img3')) {
+            $destinationPath = 'image/about/';
+            $profileImage = date('YmdHis') . "right." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['img3'] = "$profileImage";
+        }else{
+            unset($input['img3']);
+        }
+        $post->update($input);
+
+        return redirect()->route('aboutmanage')->with('alert', 'post updated');
+    }
+
+    public function portfoliomanage(){
+        $portfolio = Portfolio::all();
+        return view('backend.pages.portfolio.manage', compact('portfolio'));
+    }
+
+    public function portfoliocreate(){
+        $cleaning = Cleaning::whereIn('type', ['cleaning_service', 'pestcontrol_service', 'manpower_service'])
+                    ->latest()
+                    ->get();
+
+        return view('backend.pages.portfolio.create', compact('cleaning'));
+    }
+
+    public function portfoliostore(Request $request) {
+
+        $validated = $request->validate([
+            'title' => 'nullable',
+            'service' => 'nullable',
+            'img' => 'nullable',
+        ]);
+
+        $input = $request->all();
+        if ($image = $request->file('img')) {
+            $destinationPath = 'image/portfolio/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['img'] = "$profileImage";
+        }
+        Portfolio::create($input);
+
+        return redirect()->route('portfoliomanage')->with('alert', 'post created');
+    }
+
+    public function portfolioedit($id) {
+        $portfolio = Portfolio::findorfail($id);
+        $cleaning = Cleaning::whereIn('type', ['cleaning_service', 'pestcontrol_service', 'manpower_service'])
+                    ->latest()
+                    ->get();
+        return view('backend.pages.portfolio.edit', compact('portfolio','cleaning')) ;
+    }
+
+    public function portfolioupdate($id, Request $request) {
+
+        $post = Portfolio::findorfail($id);
+        $validated = $request->validate([
+            'title' => 'nullable',
+            'service' => 'nullable',
+            'img' => 'nullable',
+        ]);
+
+        $input = $request->all();
+
+        if ($image = $request->file('img')) {
+            $destinationPath = 'image/portfolio/';
+            $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['img'] = "$profileImage";
+        }else{
+            unset($input['img']);
+        }
+
+        $post->update($input);
+
+        return redirect()->route('portfoliomanage')->with('alert', 'post updated');
+    }
+
+    public function portfoliodelete($id) {
+        $post = Portfolio::findorfail($id);
+        $post->delete();
+        return redirect()->route('portfoliomanage')->with('alert', 'post deleted');
+    }
+
+}
