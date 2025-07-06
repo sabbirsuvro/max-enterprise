@@ -43,12 +43,12 @@
         <div class="container">
             <div class="contact-sec1">
                 <div class="shape-mockup spin d-none d-xl-block" data-bottom="-35%" data-left="30%"><img
-                        src="frontend/img/shape/vector_shape_5.png" alt="shape" /></div>
+                        src="{{ asset('frontend/img/shape/vector_shape_5.png') }}" alt="shape" /></div>
                 <div class="row gy-40">
                     <div class="col-xl-7">
                         <div class="pe-xl-4 text-xl-start text-center">
                             <div class="title-area mb-32">
-                                <span class="sub-title2"><img src="frontend/img/theme-img/title_icon.svg"
+                                <span class="sub-title2"><img src="{{ asset('frontend/img/theme-img/title_icon.svg') }}"
                                         alt="shape" />Get In touch</span>
                                 <h2 class="sec-title text-white">Our Cleaning <span class="text-theme">Service</span> Sets
                                     the Standard</h2>
@@ -58,8 +58,6 @@
                                     every job.
                                 </p>
                             </div>
-                            <a href="contact.html" class="th-btn star-btn">Get in Touch<i
-                                    class="fas fa-arrow-up-right ms-2"></i></a>
                         </div>
                     </div>
                     <div class="col-xl-5">

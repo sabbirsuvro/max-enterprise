@@ -82,6 +82,11 @@ Route::middleware(['auth', 'checktype:admin,superadmin'])->group(function () {
     Route::get('/aboutedit/{id}', [AdminController::class, 'aboutedit'])->name('aboutedit');
     Route::post('/aboutupdate/{id}', [AdminController::class, 'aboutupdate'])->name('aboutupdate');
 
+    // website
+    Route::get('/websitemanage', [AdminController::class, 'websitemanage'])->name('websitemanage');
+    Route::get('/websiteedit/{id}', [AdminController::class, 'websiteedit'])->name('websiteedit');
+    Route::post('/websiteupdate/{id}', [AdminController::class, 'websiteupdate'])->name('websiteupdate');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

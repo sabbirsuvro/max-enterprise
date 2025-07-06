@@ -10,6 +10,7 @@ use App\Models\About;
 use App\Models\Portfolio;
 use App\Models\Tesimonial;
 use App\Models\Video;
+use App\Models\Website;
 
 class AdminController extends Controller
 {
@@ -347,7 +348,6 @@ class AdminController extends Controller
 
     public function videomanage(){
         $video = Video::with('cleaning')->get();
-        // dd($video);
         return view('backend.pages.video.manage', compact('video'));
     }
 
@@ -401,6 +401,58 @@ class AdminController extends Controller
         return redirect()->route('videomanage')->with('alert', 'post deleted');
     }
 
+    public function websitemanage(){
+        $website = Website::first();
+        return view('backend.pages.website.manage', compact('website'));
+    }
 
+    public function websiteedit($id) {
+        $website = Website::findorfail($id);
+        return view('backend.pages.website.edit', compact('website')) ;
+    }
+
+    public function websiteupdate($id, Request $request) {
+
+        $post = Website::findorfail($id);
+        $validated = $request->validate([
+            'name'     => 'nullable',
+            'slogan'   => 'nullable',
+            'address'  => 'nullable',
+            'phone'    => 'nullable',
+            'hour'     => 'nullable',
+            'email'    => 'nullable',
+            'fb'       => 'nullable',
+            'twitter'  => 'nullable',
+            'linkedin' => 'nullable',
+            'insta'    => 'nullable',
+            'youtube'  => 'nullable',
+            'logo'     => 'nullable',
+            'icon'     => 'nullable',
+        ]);
+
+        $input = $request->all();
+
+        if ($image = $request->file('logo')) {
+            $destinationPath = 'image/website/';
+            $profileImage = date('YmdHis') . "_logo." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['logo'] = "$profileImage";
+        }else{
+            unset($input['logo']);
+        }
+
+        if ($image = $request->file('icon')) {
+            $destinationPath = 'image/website/';
+            $profileImage = date('YmdHis') . "icon." . $image->getClientOriginalExtension();
+            $image->move($destinationPath, $profileImage);
+            $input['icon'] = "$profileImage";
+        }else{
+            unset($input['icon']);
+        }
+
+        $post->update($input);
+
+        return redirect()->route('websitemanage')->with('alert', 'post updated');
+    }
 
 }
