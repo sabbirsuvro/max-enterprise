@@ -172,7 +172,7 @@
                         <div class="swiper-slide">
                             <div class="service-card2">
                                 <div class="box-img"><img src="{{ asset('image/cleaning/' . $item->img) }}"
-                                        alt="Image" style="aspect-ratio: 4/3; max-hight:300px" /></div>
+                                        alt="Image" style="aspect-ratio: 4/3; max-hight:300px" style="aspect-ratio: 4/3; max-hight:300px"/></div>
                                 <div class="box-content">
                                     <div class="box-icon"><img src="{{ asset('frontend/img/icon/service_card_3.svg') }}"
                                             alt="Icon" />
@@ -253,10 +253,10 @@
             </div>
         </div>
     </section>
-    <div class="gallery-sec1" data-bg-src="frontend/img/bg/gallery_bg_1.jpg">
+    <div class="gallery-sec1" data-bg-src="{{ asset('frontend/img/bg/gallery_bg_1.jpg') }}">
         <div class="container space-top">
             <div class="title-area text-center">
-                <span class="sub-title2"><img src="frontend/img/theme-img/title_icon.svg" alt="shape" />Our
+                <span class="sub-title2"><img src="{{ asset('frontend/img/theme-img/title_icon.svg') }}" alt="shape" />Our
                     portfolio</span>
                 <h2 class="sec-title text-white">Display of Recent Projects</h2>
             </div>
@@ -265,7 +265,7 @@
             @foreach ($portfolio as $item)
                 <div class="gallery-card3 hover-item {{ $loop->iteration == 3 ? 'active' : '' }}">
                     <div class="box-img">
-                        <img src="{{ asset('image/portfolio/' . $item->img) }}" alt="gallery image" />
+                        <img src="{{ asset('image/portfolio/' . $item->img) }}" alt="gallery image" style="aspect-ratio: 4/3; max-hight:300px"/>
                     </div>
                     <div class="box-content">
                         <div class="media-body">

@@ -1,5 +1,50 @@
 @extends('frontend.layout.app')
+@push('css')
+    <style>
+        .box-img {
+            position: relative;
+            overflow: hidden;
+        }
 
+        .box-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .box-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+            padding: 20px 15px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .box-img:hover .box-content {
+            opacity: 1;
+        }
+
+        .box-content .media-body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .box-content h3,
+        .box-content p {
+            margin: 0;
+            padding: 0;
+        }
+
+        .icon-btn {
+            margin-top: 10px;
+            font-size: 20px;
+        }
+    </style>
+@endpush
 @section('content')
     <div class="breadcumb-wrapper" data-bg-src="{{ asset('frontend/img/bg/breadcrumb-bg.jpg') }}">
         <div class="breadcrumb-bottom-shape"><img src="{{ asset('frontend/img/bg/breadcrumb-bottom.png') }}" alt="shape" />
@@ -19,31 +64,54 @@
         </div>
     </div>
     <div class="overflow-hidden space gallery-sec-3">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-xl-8 col-lg-9">
-                    <div class="title-area text-center">
-                        <span class="sub-title style-3 justify-content-center"><span class="left"></span> Work Gallery
-                            <span class="right"></span></span>
-                        <h2 class="sec-title">Our Work Gallery That We Do!</h2>
-                    </div>
+        <div class="container" data-bg-src="{{ asset('frontend/img/bg/gallery_bg_1.jpg') }}">
+            <div class="space-top">
+                <div class="title-area text-center">
+                    <span class="sub-title2"><img src="{{ asset('frontend/img/theme-img/title_icon.svg') }}"
+                            alt="shape" />Our
+                        portfolio</span>
+                    <h2 class="sec-title text-white">Display of Projects</h2>
                 </div>
             </div>
-            <div class="row  justify-content-center">
+            <div class="row">
                 @foreach ($portfolio as $item)
-                <div class="col-lg-4 col-md-4">
-                    <div class="gallery-card2">
-                        <div class="gallery-img">
-                            <img src="{{ asset('image/portfolio/' . $item->img) }}" alt="gallery image" />
-                            <div class="gallery-content">
-                                <p class="box-text">{{ $item->service }}</p>
-                                <h2 class="box-title">{{ $item->title }}</h2>
+                    <div class="col-md-3 mb-4">
+                        <div class="box-img">
+                            <img src="{{ asset('image/portfolio/' . $item->img) }}" alt="gallery image"
+                                style="aspect-ratio: 4/3; max-height:300px;" />
+
+                            <div class="box-content">
+                                <div class="media-body">
+                                    <h3 class="box-title" style="color: #fff">{{ $item->title }}</h3>
+                                    <p class="box-text" style="color: #fff">{{ $item->service }}</p>
+                                    <a href="{{ asset('image/portfolio/' . $item->img) }}" class="icon-btn popup-image">
+                                        <i class="far fa-plus"></i>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
                 @endforeach
+                <div class="space-top"></div>
             </div>
         </div>
     </div>
 @endsection
+@push('js')
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const links = document.querySelectorAll('.open-modal');
+            const modalImage = document.getElementById('modalImage');
+
+            links.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const imgSrc = this.getAttribute('data-img');
+                    modalImage.src = imgSrc;
+                    const modal = new bootstrap.Modal(document.getElementById('imageModal'));
+                    modal.show();
+                });
+            });
+        });
+    </script>
+@endpush
