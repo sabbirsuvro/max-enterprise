@@ -6,13 +6,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--favicon-->
-    <link rel="icon" href="{{ asset('backend/images/favicon-32x32.png') }}" type="image/png" />
+    @php
+        $website = App\Models\Website::first();
+    @endphp
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('image/website/' .$website->icon) }}" />
+
+    {{-- <link rel="icon" href="{{ asset('backend/images/favicon-32x32.png') }}" type="image/png" /> --}}
     <!--plugins-->
     <link href="{{ asset('backend/plugins/vectormap/jquery-jvectormap-2.0.2.css') }}" rel="stylesheet" />
     <link href="{{ asset('backend/plugins/simplebar/css/simplebar.css') }}" rel="stylesheet" />
     <link href="{{ asset('backend/plugins/perfect-scrollbar/css/perfect-scrollbar.css') }}" rel="stylesheet" />
     <link href="{{ asset('backend/plugins/metismenu/css/metisMenu.min.css') }}" rel="stylesheet" />
     <!-- loader-->
+
     <link href="{{ asset('backend/css/pace.min.css') }}" rel="stylesheet" />
     <script src="{{ asset('backend/js/pace.min.js') }}"></script>
     <!-- Bootstrap CSS -->
@@ -45,7 +51,7 @@
             white-space: normal;
         }
     </style>
-    <title>Backend & Frontend Templete</title>
+    <title>{{ $website->name }}</title>
 </head>
 
 <body>
@@ -55,10 +61,10 @@
         <div class="sidebar-wrapper" data-simplebar="true">
             <div class="sidebar-header">
                 <div>
-                    <img src="backend/images/logo-icon.png" class="logo-icon" alt="logo icon">
+                    <img src="{{ asset('image/website/' .$website->icon) }}" class="logo-icon" alt="logo icon">
                 </div>
                 <div>
-                    <h4 class="logo-text">Rocker</h4>
+                    <h4 class="logo-text">{{ $website->name }}</h4>
                 </div>
                 <div class="toggle-icon ms-auto"><i class='bx bx-arrow-back'></i>
                 </div>
@@ -69,7 +75,7 @@
                     <a href="{{ route('dashboard') }}">
                         <div class="parent-icon"><i class='bx bx-home-alt'></i>
                         </div>
-                        <div class="menu-title">Home</div>
+                        <div class="menu-title">Dashboard</div>
                     </a>
                 </li>
                 <li>
@@ -126,6 +132,13 @@
                         <div class="parent-icon"><i class='bx bx-home-alt'></i>
                         </div>
                         <div class="menu-title">Script Push</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('careermanage') }}">
+                        <div class="parent-icon"><i class='bx bx-home-alt'></i>
+                        </div>
+                        <div class="menu-title">Career Manage</div>
                     </a>
                 </li>
                 <li>

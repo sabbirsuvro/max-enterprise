@@ -1,233 +1,137 @@
 @extends('backend.layout.app')
 @push('css')
-
 @endpush
 @section('content')
-<div class="page-content">
-				<div class="row row-cols-2 row-cols-sm-3 row-cols-lg-4 row-cols-xl-5 row-cols-xxl-5 product-grid">
-					<div class="col">
-						<div class="card">
-							<img src="backend/images/products/01.png" class="card-img-top" alt="...">
-							<div class="">
-								<div class="position-absolute top-0 end-0 m-3 product-discount"><span
-										class="text-info">-10%</span></div>
-							</div>
-							<div class="card-body">
-								<h6 class="card-title cursor-pointer clamp-one-line">Nest Shaped Chair</h6>
+    <div class="page-content">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4">
+            <div class="col">
+                <div class="card radius-10 border-start border-0 border-4 border-info">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <p class="mb-0 text-secondary">Total cleaning</p>
+                                <h4 class="my-1 text-info">{{ $cleaning }}</h4>
+                            </div>
+                            <div class="widgets-icons-2 rounded-circle bg-gradient-blues text-white ms-auto"><i
+                                    class='bx bxs-cart'></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card radius-10 border-start border-0 border-4 border-danger">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <p class="mb-0 text-secondary">Total pestcontroll</p>
+                                <h4 class="my-1 text-danger">{{ $pestcontroll }}</h4>
+                            </div>
+                            <div class="widgets-icons-2 rounded-circle bg-gradient-burning text-white ms-auto"><i
+                                    class='bx bxs-wallet'></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card radius-10 border-start border-0 border-4 border-success">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <p class="mb-0 text-secondary">Total manpower</p>
+                                <h4 class="my-1 text-success">{{ $manpower }}</h4>
+                            </div>
+                            <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto"><i
+                                    class='bx bxs-bar-chart-alt-2'></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card radius-10 border-start border-0 border-4 border-warning">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <p class="mb-0 text-secondary">Total blog</p>
+                                <h4 class="my-1 text-warning">{{ $blog }}</h4>
+                            </div>
+                            <div class="widgets-icons-2 rounded-circle bg-gradient-orange text-white ms-auto"><i
+                                    class='bx bxs-group'></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-								<div class="d-flex justify-content-between mt-2">
-									<div class="price d-flex align-items-start justify-content-center flex-column">
-										<del class="text-danger">1000</del>
-										<p class="text-info m-0">900 tk</p>
-									</div>
-									<div class="addtocart d-flex align-items-center">
-										<a href="" class="btn btn-info py-1 m-0">Add</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col">
-						<div class="card">
-							<img src="backend/images/products/01.png" class="card-img-top" alt="...">
-							<div class="">
-								<div class="position-absolute top-0 end-0 m-3 product-discount"><span
-										class="text-info">-10%</span></div>
-							</div>
-							<div class="card-body">
-								<h6 class="card-title cursor-pointer clamp-one-line">Nest Shaped Chair</h6>
+        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4">
+            <div class="col">
+                <div class="card radius-10 border-start border-0 border-4 border-info">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <p class="mb-0 text-secondary">Total tesimonial</p>
+                                <h4 class="my-1 text-info">{{ $tesimonial }}</h4>
+                            </div>
+                            <div class="widgets-icons-2 rounded-circle bg-gradient-blues text-white ms-auto"><i
+                                    class='bx bxs-cart'></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card radius-10 border-start border-0 border-4 border-danger">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <p class="mb-0 text-secondary">Total portfolio</p>
+                                <h4 class="my-1 text-danger">{{ $portfolio }}</h4>
+                            </div>
+                            <div class="widgets-icons-2 rounded-circle bg-gradient-burning text-white ms-auto"><i
+                                    class='bx bxs-wallet'></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card radius-10 border-start border-0 border-4 border-success">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <p class="mb-0 text-secondary">Total Career</p>
+                                <h4 class="my-1 text-success">{{ $career }}</h4>
+                            </div>
+                            <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto"><i
+                                    class='bx bxs-bar-chart-alt-2'></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card radius-10 border-start border-0 border-4 border-warning">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center">
+                            <div>
+                                <p class="mb-0 text-secondary">Total bounch</p>
+                                <h4 class="my-1 text-warning">1.4K</h4>
+                            </div>
+                            <div class="widgets-icons-2 rounded-circle bg-gradient-orange text-white ms-auto"><i
+                                    class='bx bxs-group'></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
-								<div class="d-flex justify-content-between mt-2">
-									<div class="price d-flex align-items-start justify-content-center flex-column">
-										<del class="text-danger">1000</del>
-										<p class="text-info m-0">900 tk</p>
-									</div>
-									<div class="addtocart d-flex align-items-center">
-										<a href="" class="btn btn-info py-1 m-0">Choose</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col">
-						<div class="card">
-							<img src="backend/images/products/01.png" class="card-img-top" alt="...">
-							<div class="">
-								<div class="position-absolute top-0 end-0 m-3 product-discount"><span
-										class="text-info">-10%</span></div>
-							</div>
-							<div class="card-body">
-								<h6 class="card-title cursor-pointer clamp-one-line">Nest Shaped Chair</h6>
-
-								<div class="d-flex justify-content-between mt-2">
-									<div class="price d-flex align-items-start justify-content-center flex-column">
-										<del class="text-danger">1000</del>
-										<p class="text-info m-0">900 tk</p>
-									</div>
-									<div class="addtocart d-flex align-items-center">
-										<a href="" class="btn btn-info py-1 m-0">Choose</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col">
-						<div class="card">
-							<img src="backend/images/products/01.png" class="card-img-top" alt="...">
-							<div class="">
-								<div class="position-absolute top-0 end-0 m-3 product-discount"><span
-										class="text-info">-10%</span></div>
-							</div>
-							<div class="card-body">
-								<h6 class="card-title cursor-pointer clamp-one-line">Nest Shaped Chair</h6>
-
-								<div class="d-flex justify-content-between mt-2">
-									<div class="price d-flex align-items-start justify-content-center flex-column">
-										<del class="text-danger">1000</del>
-										<p class="text-info m-0">900 tk</p>
-									</div>
-									<div class="addtocart d-flex align-items-center">
-										<a href="" class="btn btn-info py-1 m-0">Add</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col">
-						<div class="card">
-							<img src="backend/images/products/01.png" class="card-img-top" alt="...">
-							<div class="">
-								<div class="position-absolute top-0 end-0 m-3 product-discount"><span
-										class="text-info">-10%</span></div>
-							</div>
-							<div class="card-body">
-								<h6 class="card-title cursor-pointer clamp-one-line">Nest Shaped Chair</h6>
-
-								<div class="d-flex justify-content-between mt-2">
-									<div class="price d-flex align-items-start justify-content-center flex-column">
-										<del class="text-danger">1000</del>
-										<p class="text-info m-0">900 tk</p>
-									</div>
-									<div class="addtocart d-flex align-items-center">
-										<a href="" class="btn btn-info py-1 m-0">Add</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col">
-						<div class="card">
-							<img src="backend/images/products/01.png" class="card-img-top" alt="...">
-							<div class="">
-								<div class="position-absolute top-0 end-0 m-3 product-discount"><span
-										class="text-info">-10%</span></div>
-							</div>
-							<div class="card-body">
-								<h6 class="card-title cursor-pointer clamp-one-line">Nest Shaped Chair</h6>
-
-								<div class="d-flex justify-content-between mt-2">
-									<div class="price d-flex align-items-start justify-content-center flex-column">
-										<del class="text-danger">1000</del>
-										<p class="text-info m-0">900 tk</p>
-									</div>
-									<div class="addtocart d-flex align-items-center">
-										<a href="" class="btn btn-info py-1 m-0">Choose</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col">
-						<div class="card">
-							<img src="backend/images/products/01.png" class="card-img-top" alt="...">
-							<div class="">
-								<div class="position-absolute top-0 end-0 m-3 product-discount"><span
-										class="text-info">-10%</span></div>
-							</div>
-							<div class="card-body">
-								<h6 class="card-title cursor-pointer clamp-one-line">Nest Shaped Chair</h6>
-
-								<div class="d-flex justify-content-between mt-2">
-									<div class="price d-flex align-items-start justify-content-center flex-column">
-										<del class="text-danger">1000</del>
-										<p class="text-info m-0">900 tk</p>
-									</div>
-									<div class="addtocart d-flex align-items-center">
-										<a href="" class="btn btn-info py-1 m-0">Add</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col">
-						<div class="card">
-							<img src="backend/images/products/01.png" class="card-img-top" alt="...">
-							<div class="">
-								<div class="position-absolute top-0 end-0 m-3 product-discount"><span
-										class="text-info">-10%</span></div>
-							</div>
-							<div class="card-body">
-								<h6 class="card-title cursor-pointer clamp-one-line">Nest Shaped Chair</h6>
-
-								<div class="d-flex justify-content-between mt-2">
-									<div class="price d-flex align-items-start justify-content-center flex-column">
-										<del class="text-danger">1000</del>
-										<p class="text-info m-0">900 tk</p>
-									</div>
-									<div class="addtocart d-flex align-items-center">
-										<a href="" class="btn btn-info py-1 m-0">Add</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col">
-						<div class="card">
-							<img src="backend/images/products/01.png" class="card-img-top" alt="...">
-							<div class="">
-								<div class="position-absolute top-0 end-0 m-3 product-discount"><span
-										class="text-info">-10%</span></div>
-							</div>
-							<div class="card-body">
-								<h6 class="card-title cursor-pointer clamp-one-line">Nest Shaped Chair</h6>
-
-								<div class="d-flex justify-content-between mt-2">
-									<div class="price d-flex align-items-start justify-content-center flex-column">
-										<del class="text-danger">1000</del>
-										<p class="text-info m-0">900 tk</p>
-									</div>
-									<div class="addtocart d-flex align-items-center">
-										<a href="" class="btn btn-info py-1 m-0">Choose</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col">
-						<div class="card">
-							<img src="backend/images/products/01.png" class="card-img-top" alt="...">
-							<div class="">
-								<div class="position-absolute top-0 end-0 m-3 product-discount"><span
-										class="text-info">-10%</span></div>
-							</div>
-							<div class="card-body">
-								<h6 class="card-title cursor-pointer clamp-one-line">Nest Shaped Chair</h6>
-
-								<div class="d-flex justify-content-between mt-2">
-									<div class="price d-flex align-items-start justify-content-center flex-column">
-										<del class="text-danger">1000</del>
-										<p class="text-info m-0">900 tk</p>
-									</div>
-									<div class="addtocart d-flex align-items-center">
-										<a href="" class="btn btn-info py-1 m-0">Add</a>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
+    <p class="text-white">frontpage demo</p>
+    <img src="{{ asset('image.png') }}" alt="" class="w-100">
 @endsection
 @push('js')
-
 @endpush

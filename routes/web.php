@@ -40,6 +40,7 @@ Route::get('/testimonial', [HomeController::class, 'testimonial'])->name('testim
 Route::get('/project', [HomeController::class, 'portfolio'])->name('portfolio');
 Route::get('/video', [HomeController::class, 'video'])->name('video');
 Route::post('/clientcontact', [HomeController::class, 'clientcontact'])->name('clientcontact');
+Route::get('/career', [HomeController::class, 'career'])->name('career');
 
 
 Route::middleware(['auth', 'checktype:admin,superadmin'])->group(function () {
@@ -101,6 +102,14 @@ Route::middleware(['auth', 'checktype:admin,superadmin'])->group(function () {
     Route::get('/aboutmanage', [AdminController::class, 'aboutmanage'])->name('aboutmanage');
     Route::get('/aboutedit/{id}', [AdminController::class, 'aboutedit'])->name('aboutedit');
     Route::post('/aboutupdate/{id}', [AdminController::class, 'aboutupdate'])->name('aboutupdate');
+
+    // careermanage
+    Route::get('/careermanage', [AdminController::class, 'careermanage'])->name('careermanage');
+    Route::get('/careercreate', [AdminController::class, 'careercreate'])->name('careercreate');
+    Route::post('/careerstore', [AdminController::class, 'careerstore'])->name('careerstore');
+    Route::get('/careeredit/{id}', [AdminController::class, 'careeredit'])->name('careeredit');
+    Route::post('/careerupdate/{id}', [AdminController::class, 'careerupdate'])->name('careerupdate');
+    Route::get('/careerdelete/{id}', [AdminController::class, 'careerdelete'])->name('careerdelete');
 
     // website
     Route::get('/websitemanage', [AdminController::class, 'websitemanage'])->name('websitemanage');

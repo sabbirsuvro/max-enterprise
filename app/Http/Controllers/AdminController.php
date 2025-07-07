@@ -13,11 +13,19 @@ use App\Models\Video;
 use App\Models\Website;
 use App\Models\Clientcontact;
 use App\Models\Codepush;
+use App\Models\Career;
 
 class AdminController extends Controller
 {
     public function dashboard(){
-        return view('backend.dashboard');
+        $cleaning = Cleaning::where('type', 'cleaning_service')->count();
+        $pestcontroll = Cleaning::where('type', 'pestcontrol_service')->count();
+        $manpower = Cleaning::where('type', 'manpower_service')->count();
+        $blog = Cleaning::where('type', 'blog')->count();
+        $tesimonial = Tesimonial::count();
+        $portfolio = Portfolio::count();
+        $career = Career::count();
+        return view('backend.dashboard', compact('cleaning','pestcontroll','manpower','blog','tesimonial','portfolio','career'));
     }
 
     public function ckupload(Request $request){
@@ -492,6 +500,55 @@ class AdminController extends Controller
         $post->update($input);
 
         return redirect()->route('codepushmanage')->with('alert', 'post updated');
+    }
+
+    public function careermanage(){
+        $career = Career::all();
+        return view('backend.pages.career.manage', compact('career'));
+    }
+
+    public function careercreate(){
+        return view('backend.pages.career.create');
+    }
+
+    public function careerstore(Request $request) {
+
+        $validated = $request->validate([
+            'title' => 'nullable',
+            'details' => 'nullable',
+            'type' => 'nullable',
+        ]);
+
+        $input = $request->all();
+        Career::create($input);
+
+        return redirect()->route('careermanage')->with('alert', 'post created');
+    }
+
+    public function careeredit($id) {
+        $career = Career::findorfail($id);
+        return view('backend.pages.career.edit', compact('career')) ;
+    }
+
+    public function careerupdate($id, Request $request) {
+
+        $post = Career::findorfail($id);
+        $validated = $request->validate([
+            'title' => 'nullable',
+            'details' => 'nullable',
+            'type' => 'nullable',
+        ]);
+
+        $input = $request->all();
+        $post->update($input);
+
+        return redirect()->route('careermanage')->with('alert', 'post updated');
+    }
+
+    public function careerdelete($id) {
+        $post = Career::findorfail($id);
+        $post->delete();
+        return redirect()->route('careermanage')->with('alert', 'post deleted');
     }
 
 }

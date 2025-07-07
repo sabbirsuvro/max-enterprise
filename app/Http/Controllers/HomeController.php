@@ -10,6 +10,7 @@ use App\Models\Portfolio;
 use App\Models\Tesimonial;
 use App\Models\Video;
 use App\Models\Clientcontact;
+use App\Models\Career;
 
 
 class HomeController extends Controller
@@ -128,6 +129,11 @@ class HomeController extends Controller
         Clientcontact::create($input);
 
         return redirect()->back();
+    }
+
+    public function career(){
+        $career = Career::where('type', 'active')->get();
+        return view('frontend.pages.career', compact('career'));
     }
 
 }

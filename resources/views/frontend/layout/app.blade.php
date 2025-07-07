@@ -283,7 +283,7 @@
                             <h3 class="widget_title">Quick Links</h3>
                             <div class="menu-all-pages-container">
                                 <ul class="menu">
-                                    <li><a href="{{ route('home') }}">Home</a></li>
+                                    <li><a href="{{ route('career') }}">Career</a></li>
                                     <li><a href="{{ route('portfolio') }}">Project</a></li>
                                     <li><a href="{{ route('testimonial') }}">Testimonial</a></li>
                                     <li><a href="{{ route('contact') }}">Contact Us</a></li>
