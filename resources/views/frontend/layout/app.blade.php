@@ -9,33 +9,22 @@
         $pestcontroll = App\Models\Cleaning::where('type', 'pestcontrol_service')->get();
         $manpower = App\Models\Cleaning::where('type', 'manpower_service')->get();
         $website = App\Models\Website::first();
+        $codepush = App\Models\Codepush::first();
 
         $cleaningfooter = App\Models\Cleaning::where('type', 'cleaning_service')->latest()->take(2)->get();
         $pestcontrollfooter  = App\Models\Cleaning::where('type', 'pestcontrol_service')->latest()->take(2)->get();
         $manpowerfooter  = App\Models\Cleaning::where('type', 'manpower_service')->latest()->take(2)->get();
     @endphp
     <title>{{ $website->name }}</title>
+    {!! $codepush->header !!}
     <meta name="author" content="sabbirAhmed" />
     <meta name="description" content="sabbirAhmed - Cleaning Service HTML Template" />
     <meta name="keywords" content="sabbirAhmed - Cleaning Service HTML Template" />
     <meta name="robots" content="INDEX,FOLLOW" />
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
-    {{-- <link rel="apple-touch-icon" sizes="57x57" href="frontend/img/favicons/apple-icon-57x57.png" />
-    <link rel="apple-touch-icon" sizes="60x60" href="frontend/img/favicons/apple-icon-60x60.png" />
-    <link rel="apple-touch-icon" sizes="72x72" href="frontend/img/favicons/apple-icon-72x72.png" />
-    <link rel="apple-touch-icon" sizes="76x76" href="frontend/img/favicons/apple-icon-76x76.png" />
-    <link rel="apple-touch-icon" sizes="114x114" href="frontend/img/favicons/apple-icon-114x114.png" />
-    <link rel="apple-touch-icon" sizes="120x120" href="frontend/img/favicons/apple-icon-120x120.png" />
-    <link rel="apple-touch-icon" sizes="144x144" href="frontend/img/favicons/apple-icon-144x144.png" />
-    <link rel="apple-touch-icon" sizes="152x152" href="frontend/img/favicons/apple-icon-152x152.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="frontend/img/favicons/apple-icon-180x180.png" />
-    <link rel="icon" type="image/png" sizes="192x192" href="frontend/img/favicons/android-icon-192x192.png" />
-    <link rel="icon" type="image/png" sizes="32x32" href="frontend/img/favicons/favicon-32x32.png" />
-    <link rel="icon" type="image/png" sizes="96x96" href="frontend/img/favicons/favicon-96x96.png" /> --}}
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('image/website/' .$website->icon) }}" />
     <link rel="manifest" href="frontend/img/favicons/manifest.json" />
     <meta name="msapplication-TileColor" content="#ffffff" />
-    {{-- <meta name="msapplication-TileImage" content="frontend/img/favicons/ms-icon-144x144.png" /> --}}
     <meta name="theme-color" content="#ffffff" />
     <link rel="preconnect" href="https://fonts.googleapis.com/" />
     <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />
@@ -80,6 +69,7 @@
 </head>
 
 <body>
+    {!! $codepush->body !!}
     <div class="preloader">
         <button class="th-btn preloaderCls">Cancel Preloader</button>
         <div class="preloader-inner">
@@ -340,9 +330,10 @@
         <div class="copyright-wrap">
             <div class="container text-center">
                 <p class="copyright-text">Copyright <i class="fal fa-copyright"></i>{{ date('Y') }} {{ $website->name }} Powered By <a
-                        href="https://wa.me/+8801751155302">sabbir Ahmed</a> All Rights Reserved.</p>
+                        href="{{ config('app.vite_number') }}">sabbir Ahmed</a> All Rights Reserved.</p>
             </div>
         </div>
+        {!! $codepush->footer !!}
     </footer>
     <div class="scroll-top">
         <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
@@ -364,6 +355,7 @@
     <script src="{{ asset('frontend/js/isotope.pkgd.min.js') }}"></script>
     <script src="{{ asset('frontend/js/main.js') }}"></script>
     @stack('js')
+
 </body>
 
 </html>

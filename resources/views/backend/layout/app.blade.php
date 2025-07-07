@@ -115,6 +115,20 @@
                     </a>
                 </li>
                 <li>
+                    <a href="{{ route('clientcontactmanage') }}">
+                        <div class="parent-icon"><i class='bx bx-home-alt'></i>
+                        </div>
+                        <div class="menu-title">Client Contact Manage</div>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('codepushmanage') }}">
+                        <div class="parent-icon"><i class='bx bx-home-alt'></i>
+                        </div>
+                        <div class="menu-title">Script Push</div>
+                    </a>
+                </li>
+                <li>
                     <a href="{{ route('websitemanage') }}">
                         <div class="parent-icon"><i class='bx bx-home-alt'></i>
                         </div>

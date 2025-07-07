@@ -28,5 +28,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             WebsiteSeeder::class,
         ]);
+        $this->call([
+            CodepushSeeder::class,
+        ]);
     }
 }

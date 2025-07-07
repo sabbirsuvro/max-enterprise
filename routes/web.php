@@ -1,4 +1,6 @@
 <?php
+use Illuminate\Support\Facades\Artisan;
+use Illuminate\Http\Request;
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
@@ -16,6 +18,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/cc', function (Request $request) {
+    Artisan::call('view:cache');
+    Artisan::call('route:cache');
+    Artisan::call('config:cache');
+    return "✅ View, route, and config caches have been created!";
+});
+
 Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
 Route::get('/details/{id}', [HomeController::class, 'servicedetails'])->name('servicedetails');
@@ -25,10 +34,12 @@ Route::get('/cleaning', [HomeController::class, 'cleaning'])->name('cleaning');
 Route::get('/pestcontroll', [HomeController::class, 'pestcontroll'])->name('pestcontroll');
 Route::get('/manpower', [HomeController::class, 'manpower'])->name('manpower');
 Route::get('/blog', [HomeController::class, 'blog'])->name('blog');
+Route::get('/pall', [HomeController::class, 'pall'])->name('pall');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('/testimonial', [HomeController::class, 'testimonial'])->name('testimonial');
 Route::get('/project', [HomeController::class, 'portfolio'])->name('portfolio');
 Route::get('/video', [HomeController::class, 'video'])->name('video');
+Route::post('/clientcontact', [HomeController::class, 'clientcontact'])->name('clientcontact');
 
 
 Route::middleware(['auth', 'checktype:admin,superadmin'])->group(function () {
@@ -57,6 +68,15 @@ Route::middleware(['auth', 'checktype:admin,superadmin'])->group(function () {
     Route::get('/portfolioedit/{id}', [AdminController::class, 'portfolioedit'])->name('portfolioedit');
     Route::post('/portfolioupdate/{id}', [AdminController::class, 'portfolioupdate'])->name('portfolioupdate');
     Route::get('/portfoliodelete/{id}', [AdminController::class, 'portfoliodelete'])->name('portfoliodelete');
+
+    // client contact
+    Route::get('/clientcontactmanage', [AdminController::class, 'clientcontactmanage'])->name('clientcontactmanage');
+    Route::get('/clientcontactdelete/{id}', [AdminController::class, 'clientcontactdelete'])->name('clientcontactdelete');
+
+    // codepush
+    Route::get('/codepushmanage', [AdminController::class, 'codepushmanage'])->name('codepushmanage');
+    Route::get('/codepushedit/{id}', [AdminController::class, 'codepushedit'])->name('codepushedit');
+    Route::post('/codepushupdate/{id}', [AdminController::class, 'codepushupdate'])->name('codepushupdate');
 
 
     // tesimonialmanage

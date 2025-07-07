@@ -61,24 +61,24 @@
                         </div>
                     </div>
                     <div class="col-xl-5">
-                        <form action="https://html.themeholy.com/kleanix/demo/mail.php" method="POST"
-                            class="contact-form1 ajax-contact">
+                        <form action="{{ route('clientcontact') }}" method="POST" enctype="multipart/form-data"
+                            class="contact-form1">
+                            @csrf
                             <h3 class="form-title">Make Appoinment</h3>
                             <div class="input-wrap">
                                 <div class="row">
                                     <div class="form-group col-12"><input type="text" class="form-control" name="name"
                                             id="name" placeholder="Your Name" /> <i class="fal fa-user"></i></div>
-                                    <div class="form-group col-12"><input type="email" class="form-control" name="email"
-                                            id="email" placeholder="Email Address" /> <i class="fal fa-envelope"></i>
+                                    <div class="form-group col-12"><input type="number" class="form-control" name="phone"
+                                            id="email" placeholder="phone" required/> <i class="fal fa-phone"></i>
                                     </div>
                                     <div class="form-group col-12">
-                                        <select name="subject" id="subject" class="form-select">
+                                        <select id="subject" class="form-select" name="service" required>
                                             <option value="" disabled="disabled" selected="selected" hidden>Choose
                                                 Service</option>
-                                            <option value="Home Cleaning">Home Cleaning</option>
-                                            <option value="Window Cleaning">Window Cleaning</option>
-                                            <option value="Bathroom Cleaning">Bathroom Cleaning</option>
-                                            <option value="Office Cleaning">Office Cleaning</option>
+                                            @foreach ($cleaning as $item)
+                                                <option value="{{ $item->name }}">{{ $item->name }}</option>
+                                            @endforeach
                                         </select>
                                         <i class="fal fa-chevron-down"></i>
                                     </div>
@@ -86,7 +86,7 @@
                                             name="location" id="location" placeholder="Location" /> <i
                                             class="fal fa-location-dot"></i></div>
                                     <div class="form-btn col-12">
-                                        <button class="th-btn btn-fw">Submit<i
+                                        <button type="submit" class="th-btn btn-fw">Submit<i
                                                 class="fas fa-arrow-up-right ms-2"></i></button>
                                     </div>
                                 </div>

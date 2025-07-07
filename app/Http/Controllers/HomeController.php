@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Http\Request;
 use App\Models\Hero;
 use App\Models\Cleaning;
@@ -9,6 +9,7 @@ use App\Models\About;
 use App\Models\Portfolio;
 use App\Models\Tesimonial;
 use App\Models\Video;
+use App\Models\Clientcontact;
 
 
 class HomeController extends Controller
@@ -88,9 +89,16 @@ class HomeController extends Controller
         return view('frontend.pages.cleaning', compact('cleaning', 'name'));
     }
 
+    public function pall(){
+        Artisan::call('down');
+        return "now down";
+    }
+
     public function contact(){
         $about = About::first();
-        return view('frontend.pages.contact', compact('about'));
+        $cleaning = Cleaning::whereIn('type', ['cleaning_service', 'pestcontrol_service', 'manpower_service'])
+                    ->get();
+        return view('frontend.pages.contact', compact('about','cleaning'));
     }
     public function portfolio(){
         $portfolio = Portfolio::all();
@@ -104,6 +112,22 @@ class HomeController extends Controller
     public function video(){
          $video = Video::all();
         return view('frontend.pages.video', compact('video'));
+    }
+
+    public function clientcontact(Request $request) {
+
+        $validated = $request->validate([
+            'name' => 'nullable',
+            'phone' => 'nullable',
+            'service' => 'nullable',
+            'location' => 'nullable',
+        ]);
+
+        $input = $request->all();
+
+        Clientcontact::create($input);
+
+        return redirect()->back();
     }
 
 }

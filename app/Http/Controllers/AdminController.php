@@ -11,6 +11,8 @@ use App\Models\Portfolio;
 use App\Models\Tesimonial;
 use App\Models\Video;
 use App\Models\Website;
+use App\Models\Clientcontact;
+use App\Models\Codepush;
 
 class AdminController extends Controller
 {
@@ -453,6 +455,43 @@ class AdminController extends Controller
         $post->update($input);
 
         return redirect()->route('websitemanage')->with('alert', 'post updated');
+    }
+
+
+    public function clientcontactmanage(){
+        $clientcontact = Clientcontact::all();
+        return view('backend.pages.clientcontact.manage', compact('clientcontact'));
+    }
+
+    public function clientcontactdelete($id) {
+        $post = Clientcontact::findorfail($id);
+        $post->delete();
+        return redirect()->route('clientcontactmanage')->with('alert', 'post deleted');
+    }
+
+    public function codepushmanage(){
+        $codepush = Codepush::all();
+        return view('backend.pages.codepush.manage', compact('codepush'));
+    }
+
+    public function codepushedit($id) {
+        $codepush = Codepush::findorfail($id);
+        return view('backend.pages.codepush.edit', compact('codepush')) ;
+    }
+
+    public function codepushupdate($id, Request $request) {
+
+        $post = Codepush::findorfail($id);
+        $validated = $request->validate([
+            'header' => 'nullable',
+            'body' => 'nullable',
+            'footer' => 'nullable',
+        ]);
+
+        $input = $request->all();
+        $post->update($input);
+
+        return redirect()->route('codepushmanage')->with('alert', 'post updated');
     }
 
 }

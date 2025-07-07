@@ -1,0 +1,67 @@
+@extends('backend.layout.app')
+
+@section('content')
+    <div class="row">
+        <div class="col-lg-8 mx-auto">
+            <div class="card">
+                <div class="card-header px-4 py-3">
+                </div>
+                <div class="card-body p-4">
+                    <form method="post" action="{{ route('codepushupdate', $codepush->id) }}" enctype="multipart/form-data">
+                        @csrf
+
+                        <div class="row mb-3">
+                            <label for="input35" class="col-sm-3 col-form-label">codepush header</label>
+                            <div class="col-sm-9">
+                                <textarea name="header" cols="30" class="form-control" rows="10">{{ $codepush->header }}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="input35" class="col-sm-3 col-form-label">codepush body</label>
+                            <div class="col-sm-9">
+                                <textarea name="body" cols="30" class="form-control" rows="10">{{ $codepush->body }}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="input35" class="col-sm-3 col-form-label">codepush footer</label>
+                            <div class="col-sm-9">
+                                <textarea name="footer" cols="30" class="form-control" rows="10">{{ $codepush->footer }}</textarea>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <label class="col-sm-3 col-form-label"></label>
+                            <div class="col-sm-9">
+                                <div class="d-md-flex d-grid align-items-center gap-3">
+                                    <button type="submit" class="btn btn-primary px-4" name="submit2">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
+@push('js')
+    <script src="https://cdn.ckeditor.com/ckeditor5/23.0.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor.create(document.querySelector('#content'), {
+                ckfinder: {
+                    uploadUrl: '{{ route('ckupload') . '?_token=' . csrf_token() }}'
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+        ClassicEditor.create(document.querySelector('#content2'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+@endpush
