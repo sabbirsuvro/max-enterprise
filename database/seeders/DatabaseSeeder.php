@@ -31,5 +31,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             CodepushSeeder::class,
         ]);
+        $this->call([
+            NoticeSeeder::class,
+        ]);
     }
 }

@@ -10,10 +10,12 @@
         $manpower = App\Models\Cleaning::where('type', 'manpower_service')->get();
         $website = App\Models\Website::first();
         $codepush = App\Models\Codepush::first();
+        $notice = App\Models\Notice::latest()->first();
 
         $cleaningfooter = App\Models\Cleaning::where('type', 'cleaning_service')->latest()->take(2)->get();
-        $pestcontrollfooter  = App\Models\Cleaning::where('type', 'pestcontrol_service')->latest()->take(2)->get();
-        $manpowerfooter  = App\Models\Cleaning::where('type', 'manpower_service')->latest()->take(2)->get();
+        $pestcontrollfooter = App\Models\Cleaning::where('type', 'pestcontrol_service')->latest()->take(2)->get();
+        $manpowerfooter = App\Models\Cleaning::where('type', 'manpower_service')->latest()->take(2)->get();
+        $product = App\Models\Product::all();
     @endphp
     <title>{{ $website->name }}</title>
     {!! $codepush->header !!}
@@ -22,7 +24,7 @@
     <meta name="keywords" content="sabbirAhmed - Cleaning Service HTML Template" />
     <meta name="robots" content="INDEX,FOLLOW" />
     <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('image/website/' .$website->icon) }}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('image/website/' . $website->icon) }}" />
     <link rel="manifest" href="frontend/img/favicons/manifest.json" />
     <meta name="msapplication-TileColor" content="#ffffff" />
     <meta name="theme-color" content="#ffffff" />
@@ -64,6 +66,9 @@
             text-overflow: ellipsis;
             white-space: normal;
         }
+        .main-menu > ul > li {
+            margin: 0px 5px !important;
+        }
     </style>
     @stack('css')
 </head>
@@ -80,7 +85,8 @@
         <div class="th-menu-area text-center">
             <button class="th-menu-toggle"><i class="fal fa-times"></i></button>
             <div class="mobile-logo">
-                <a href="{{ route('home') }}"><img src="{{ asset('image/website' .$website->logo) }}" alt="sabbirAhmed" /></a>
+                <a href="{{ route('home') }}"><img src="{{ asset('image/website/' . $website->logo) }}"
+                        alt="sabbirAhmed" /></a>
             </div>
             <div class="th-mobile-menu">
                 <ul>
@@ -121,7 +127,12 @@
             </div>
         </div>
     </div>
-    <header class="th-header header-layout3">
+    <header class="th-header header-layout3" style="background-color: #001524;">
+        <div class="header-top px-3">
+                    <marquee onmouseover="this.stop();" onmouseout="this.start();" style="color: var(--theme-color)">
+                        {{ $notice->notice }}
+                    </marquee>
+                    </div>
         <div class="header-top">
             <div class="container">
                 <div class="row justify-content-center justify-content-lg-between align-items-center gy-2">
@@ -135,7 +146,9 @@
                             </ul>
                         </div>
                     </div>
+
                     <div class="col-auto">
+                    {{-- <div class="col-auto d-none d-lg-block"> --}}
                         <div class="header-links">
                             <ul>
                                 <li>
@@ -159,7 +172,8 @@
                     <div class="row align-items-center justify-content-between">
                         <div class="col-auto">
                             <div class="header-logo">
-                                <a href="{{ route('home') }}"><img src="{{ asset('image/website/' .$website->logo) }}" alt="sabbirAhmed" /></a>
+                                <a href="{{ route('home') }}"><img
+                                        src="{{ asset('image/website/' . $website->logo) }}" alt="sabbirAhmed" /></a>
                             </div>
                         </div>
                         <div class="col-auto d-none d-lg-inline-block">
@@ -200,9 +214,18 @@
 
                                         </ul>
                                     </li>
-                                    <li>
-                                        <a href="{{ route('blog') }}">Blog</a>
+                                    <li class="menu-item-has-children">
+                                        <a href="#">Products</a>
+                                        <ul class="sub-menu">
+                                            @foreach ($product as $item)
+                                                <li class="border-bottom py-2"><a
+                                                        href="{{ route('productsbyCategory', $item->id) }}">{{ $item->name }}</a>
+                                                </li>
+                                            @endforeach
+
+                                        </ul>
                                     </li>
+
                                 </ul>
                             </nav>
                         </div>
@@ -241,8 +264,8 @@
                             <div class="box-icon"><i class="fa-solid fa-phone"></i></div>
                             <div class="box-content">
                                 <h3 class="box-title">Hotline</h3>
-                                <p class="box-text"><a href="mailto:{{ $website->email }}">{{ $website->email }}</a> <a
-                                        href="tel:{{ $website->phone }}">{{ $website->phone }}</a></p>
+                                <p class="box-text"><a href="mailto:{{ $website->email }}">{{ $website->email }}</a>
+                                    <a href="tel:{{ $website->phone }}">{{ $website->phone }}</a></p>
                             </div>
                         </div>
                     </div>
@@ -265,7 +288,8 @@
                         <div class="widget footer-widget">
                             <div class="th-widget-about">
                                 <div class="about-logo">
-                                    <a href="{{ route('home') }}"><img style="color: white" src="{{ asset('image/website/' .$website->logo) }}"
+                                    <a href="{{ route('home') }}"><img style="color: white"
+                                            src="{{ asset('image/website/' . $website->logo) }}"
                                             alt="sabbirAhmed" /></a>
                                 </div>
                                 <p class="about-text">{{ $website->slogan }}.</p>
@@ -299,13 +323,16 @@
                             <div class="menu-all-pages-container">
                                 <ul class="menu">
                                     @foreach ($cleaningfooter as $item)
-                                        <li><a href="{{ route('servicedetails',$item->id) }}">{{ $item->name }}</a></li>
+                                        <li><a href="{{ route('servicedetails', $item->id) }}">{{ $item->name }}</a>
+                                        </li>
                                     @endforeach
                                     @foreach ($pestcontrollfooter as $item)
-                                        <li><a href="{{ route('servicedetails',$item->id) }}">{{ $item->name }}</a></li>
+                                        <li><a href="{{ route('servicedetails', $item->id) }}">{{ $item->name }}</a>
+                                        </li>
                                     @endforeach
                                     @foreach ($manpowerfooter as $item)
-                                        <li><a href="{{ route('servicedetails',$item->id) }}">{{ $item->name }}</a></li>
+                                        <li><a href="{{ route('servicedetails', $item->id) }}">{{ $item->name }}</a>
+                                        </li>
                                     @endforeach
                                 </ul>
                             </div>
@@ -316,11 +343,13 @@
                             <h3 class="widget_title">Get in touch!</h3>
                             <div class="newsletter-widget">
 
-                                <iframe src="https://www.google.com/maps/embed?pb={{ $website->map }}" width="200" height="150" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                                 <div class="header-button">
-                                <a href="{{ route('contact') }}" class="th-btn star-btn">Take an Appoinment<i
-                                        class="fas fa-arrow-up-right ms-2"></i></a>
-                            </div>
+                                <iframe src="https://www.google.com/maps/embed?pb={{ $website->map }}" width="200"
+                                    height="150" style="border:0;" allowfullscreen="" loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                <div class="header-button">
+                                    <a href="{{ route('contact') }}" class="th-btn star-btn">Take an Appoinment<i
+                                            class="fas fa-arrow-up-right ms-2"></i></a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -329,8 +358,9 @@
         </div>
         <div class="copyright-wrap">
             <div class="container text-center">
-                <p class="copyright-text">Copyright <i class="fal fa-copyright"></i>{{ date('Y') }} {{ $website->name }} Powered By <a
-                        href="{{ config('app.vite_number') }}">sabbir Ahmed</a> All Rights Reserved.</p>
+                <p class="copyright-text">Copyright <i class="fal fa-copyright"></i>{{ date('Y') }}
+                    {{ $website->name }} Powered By <a href="{{ config('app.vite_number') }}">sabbir Ahmed</a> All
+                    Rights Reserved.</p>
             </div>
         </div>
         {!! $codepush->footer !!}

@@ -14,6 +14,9 @@ use App\Models\Website;
 use App\Models\Clientcontact;
 use App\Models\Codepush;
 use App\Models\Career;
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\Notice;
 
 class AdminController extends Controller
 {
@@ -465,7 +468,6 @@ class AdminController extends Controller
         return redirect()->route('websitemanage')->with('alert', 'post updated');
     }
 
-
     public function clientcontactmanage(){
         $clientcontact = Clientcontact::all();
         return view('backend.pages.clientcontact.manage', compact('clientcontact'));
@@ -550,5 +552,201 @@ class AdminController extends Controller
         $post->delete();
         return redirect()->route('careermanage')->with('alert', 'post deleted');
     }
+
+    public function categorymanage(){
+        $category = Category::all();
+        return view('backend.pages.category.manage', compact('category'));
+    }
+
+    public function categorycreate(){
+        return view('backend.pages.category.create');
+    }
+
+    public function categorystore(Request $request) {
+
+        $validated = $request->validate([
+            'name' => 'nullable',
+        ]);
+
+        $input = $request->all();
+        Category::create($input);
+
+        return redirect()->route('categorymanage')->with('alert', 'post created');
+    }
+
+    public function categoryedit($id) {
+        $category = Category::findorfail($id);
+        return view('backend.pages.category.edit', compact('category')) ;
+    }
+
+    public function categoryupdate($id, Request $request) {
+
+        $post = Category::findorfail($id);
+        $validated = $request->validate([
+            'name' => 'nullable',
+        ]);
+
+        $input = $request->all();
+        $post->update($input);
+
+        return redirect()->route('categorymanage')->with('alert', 'post updated');
+    }
+
+    public function categorydelete($id) {
+        $post = Category::findorfail($id);
+        $post->delete();
+        return redirect()->route('categorymanage')->with('alert', 'post deleted');
+    }
+
+    public function productmanage(){
+        $product = Product::all();
+        return view('backend.pages.product.manage', compact('product'));
+    }
+
+    public function productcreate(){
+        $category = Category::all();
+        return view('backend.pages.product.create', compact('category'));
+    }
+
+    public function productstore(Request $request){
+
+        $validated = $request->validate([
+            'name' => 'nullable',
+            'img.*' => 'nullable',
+            'price' => 'nullable',
+            'details' => 'nullable',
+            'category' => 'nullable',
+        ]);
+
+        $input = $request->except('img');
+
+        $imagePaths = [];
+
+        if ($request->hasFile('img')) {
+            foreach ($request->file('img') as $image) {
+                $destinationPath = public_path('images/product/');
+                $uniqueName = date('YmdHis') . uniqid() . "." . $image->getClientOriginalExtension();
+                if (!file_exists($destinationPath)) {
+                    mkdir($destinationPath, 0755, true);
+                }
+
+                $image->move($destinationPath, $uniqueName);
+                $imagePaths[] = 'images/product/' . $uniqueName;
+            }
+        }
+
+        $input['img'] = $imagePaths;
+
+        Product::create($input);
+
+        return redirect()->route('productmanage')->with('alert', 'Product created successfully');
+    }
+
+    public function productedit($id) {
+        $product = Product::findorfail($id);
+        $category = Category::all();
+        return view('backend.pages.product.edit', compact('product','category')) ;
+    }
+
+    public function productupdate(Request $request, $id){
+
+        $product = Product::findOrFail($id);
+
+        $request->validate([
+            'name' => 'required|max:255',
+            'category' => 'required|exists:categories,id',
+            'price' => 'required|numeric',
+            'details' => 'required|string',
+            'img.*' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'delete_images' => 'nullable|array',
+            'delete_images.*' => 'string',
+        ]);
+
+        $input = $request->except(['img', 'delete_images']);
+
+        $currentImages = $product->img ?? [];
+
+        if ($request->has('delete_images')) {
+            foreach ($request->delete_images as $imgToDelete) {
+                $filePath = public_path($imgToDelete);
+                if (file_exists($filePath)) {
+                    unlink($filePath);
+                }
+                $currentImages = array_filter($currentImages, fn($img) => $img !== $imgToDelete);
+            }
+        }
+
+        if ($request->hasFile('img')) {
+            foreach ($request->file('img') as $image) {
+                $destinationPath = public_path('images/product');
+                if (!file_exists($destinationPath)) {
+                    mkdir($destinationPath, 0755, true);
+                }
+                $uniqueName = date('YmdHis') . uniqid() . "." . $image->getClientOriginalExtension();
+                $image->move($destinationPath, $uniqueName);
+                $currentImages[] = 'images/product/' . $uniqueName;
+            }
+        }
+
+        $input['img'] = array_values($currentImages);
+
+        $product->update($input);
+
+        return redirect()->route('productmanage')->with('alert', 'Product updated successfully');
+    }
+
+    public function productdelete($id) {
+        $post = Product::findorfail($id);
+        $post->delete();
+        return redirect()->route('productmanage')->with('alert', 'post deleted');
+    }
+
+    public function noticemanage(){
+        $notice = Notice::all();
+        return view('backend.pages.notice.manage', compact('notice'));
+    }
+
+    public function noticecreate(){
+        return view('backend.pages.notice.create');
+    }
+
+    public function noticestore(Request $request) {
+
+        $validated = $request->validate([
+            'notice' => 'nullable',
+        ]);
+
+        $input = $request->all();
+        Notice::create($input);
+
+        return redirect()->route('noticemanage')->with('alert', 'post created');
+    }
+
+    public function noticeedit($id) {
+        $notice = Notice::findorfail($id);
+        return view('backend.pages.notice.edit', compact('notice')) ;
+    }
+
+    public function noticeupdate($id, Request $request) {
+
+        $post = Notice::findorfail($id);
+        $validated = $request->validate([
+            'notice' => 'nullable',
+        ]);
+
+        $input = $request->all();
+        $post->update($input);
+
+        return redirect()->route('noticemanage')->with('alert', 'post updated');
+    }
+
+    public function noticedelete($id) {
+        $post = Notice::findorfail($id);
+        $post->delete();
+        return redirect()->route('noticemanage')->with('alert', 'post deleted');
+    }
+
+
+
 
 }

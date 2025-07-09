@@ -42,6 +42,11 @@ Route::get('/video', [HomeController::class, 'video'])->name('video');
 Route::post('/clientcontact', [HomeController::class, 'clientcontact'])->name('clientcontact');
 Route::get('/career', [HomeController::class, 'career'])->name('career');
 
+Route::get('/products/category/{id}', [HomeController::class, 'categoryProducts'])->name('productsbyCategory');
+Route::get('/product/{id}', [HomeController::class, 'productdetails'])->name('productdetails');
+
+
+
 
 Route::middleware(['auth', 'checktype:admin,superadmin'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
@@ -110,6 +115,31 @@ Route::middleware(['auth', 'checktype:admin,superadmin'])->group(function () {
     Route::get('/careeredit/{id}', [AdminController::class, 'careeredit'])->name('careeredit');
     Route::post('/careerupdate/{id}', [AdminController::class, 'careerupdate'])->name('careerupdate');
     Route::get('/careerdelete/{id}', [AdminController::class, 'careerdelete'])->name('careerdelete');
+
+    // categorymanage
+    Route::get('/categorymanage', [AdminController::class, 'categorymanage'])->name('categorymanage');
+    Route::get('/categorycreate', [AdminController::class, 'categorycreate'])->name('categorycreate');
+    Route::post('/categorystore', [AdminController::class, 'categorystore'])->name('categorystore');
+    Route::get('/categoryedit/{id}', [AdminController::class, 'categoryedit'])->name('categoryedit');
+    Route::post('/categoryupdate/{id}', [AdminController::class, 'categoryupdate'])->name('categoryupdate');
+    Route::get('/categorydelete/{id}', [AdminController::class, 'categorydelete'])->name('categorydelete');
+
+
+    // productmanage
+    Route::get('/productmanage', [AdminController::class, 'productmanage'])->name('productmanage');
+    Route::get('/productcreate', [AdminController::class, 'productcreate'])->name('productcreate');
+    Route::post('/productstore', [AdminController::class, 'productstore'])->name('productstore');
+    Route::get('/productedit/{id}', [AdminController::class, 'productedit'])->name('productedit');
+    Route::post('/productupdate/{id}', [AdminController::class, 'productupdate'])->name('productupdate');
+    Route::get('/productdelete/{id}', [AdminController::class, 'productdelete'])->name('productdelete');
+
+    // noticemanage
+    Route::get('/noticemanage', [AdminController::class, 'noticemanage'])->name('noticemanage');
+    Route::get('/noticecreate', [AdminController::class, 'noticecreate'])->name('noticecreate');
+    Route::post('/noticestore', [AdminController::class, 'noticestore'])->name('noticestore');
+    Route::get('/noticeedit/{id}', [AdminController::class, 'noticeedit'])->name('noticeedit');
+    Route::post('/noticeupdate/{id}', [AdminController::class, 'noticeupdate'])->name('noticeupdate');
+    Route::get('/noticedelete/{id}', [AdminController::class, 'noticedelete'])->name('noticedelete');
 
     // website
     Route::get('/websitemanage', [AdminController::class, 'websitemanage'])->name('websitemanage');

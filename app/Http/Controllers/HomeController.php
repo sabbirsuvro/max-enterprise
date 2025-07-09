@@ -11,6 +11,8 @@ use App\Models\Tesimonial;
 use App\Models\Video;
 use App\Models\Clientcontact;
 use App\Models\Career;
+use App\Models\Product;
+use App\Models\Category;
 
 
 class HomeController extends Controller
@@ -135,5 +137,27 @@ class HomeController extends Controller
         $career = Career::where('type', 'active')->get();
         return view('frontend.pages.career', compact('career'));
     }
+
+    public function categoryProducts($categoryId){
+
+        $products = Product::where('category', $categoryId)
+                            ->with('categoryData')
+                            ->get();
+        $category = Category::findOrFail($categoryId);
+
+        return view('frontend.pages.categoryproduct', compact('products', 'category'));
+    }
+
+public function productdetails($id)
+{
+    // Eager-load categoryData relationship
+    $product = Product::with('categoryData')->findOrFail($id);
+    $productlist = Product::latest()->take(6)
+                     ->get();;
+
+    return view('frontend.pages.productdetails', compact('product','productlist'));
+}
+
+
 
 }

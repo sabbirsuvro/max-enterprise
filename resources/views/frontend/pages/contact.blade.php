@@ -76,6 +76,7 @@
                                         <select id="subject" class="form-select" name="service" required>
                                             <option value="" disabled="disabled" selected="selected" hidden>Choose
                                                 Service</option>
+                                                <option value="buy product">Buy Product</option>
                                             @foreach ($cleaning as $item)
                                                 <option value="{{ $item->name }}">{{ $item->name }}</option>
                                             @endforeach
