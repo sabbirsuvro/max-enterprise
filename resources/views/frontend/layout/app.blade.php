@@ -66,7 +66,8 @@
             text-overflow: ellipsis;
             white-space: normal;
         }
-        .main-menu > ul > li {
+
+        .main-menu>ul>li {
             margin: 0px 5px !important;
         }
     </style>
@@ -129,10 +130,10 @@
     </div>
     <header class="th-header header-layout3" style="background-color: #001524;">
         <div class="header-top px-3">
-                    <marquee onmouseover="this.stop();" onmouseout="this.start();" style="color: var(--theme-color)">
-                        {{ $notice->notice }}
-                    </marquee>
-                    </div>
+            <marquee onmouseover="this.stop();" onmouseout="this.start();" style="color: var(--theme-color)">
+                {{ $notice->notice }}
+            </marquee>
+        </div>
         <div class="header-top">
             <div class="container">
                 <div class="row justify-content-center justify-content-lg-between align-items-center gy-2">
@@ -148,7 +149,7 @@
                     </div>
 
                     <div class="col-auto">
-                    {{-- <div class="col-auto d-none d-lg-block"> --}}
+                        {{-- <div class="col-auto d-none d-lg-block"> --}}
                         <div class="header-links">
                             <ul>
                                 <li>
@@ -265,7 +266,8 @@
                             <div class="box-content">
                                 <h3 class="box-title">Hotline</h3>
                                 <p class="box-text"><a href="mailto:{{ $website->email }}">{{ $website->email }}</a>
-                                    <a href="tel:{{ $website->phone }}">{{ $website->phone }}</a></p>
+                                    <a href="tel:{{ $website->phone }}">{{ $website->phone }}</a>
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -323,15 +325,18 @@
                             <div class="menu-all-pages-container">
                                 <ul class="menu">
                                     @foreach ($cleaningfooter as $item)
-                                        <li><a href="{{ route('servicedetails', $item->id) }}">{{ $item->name }}</a>
+                                        <li><a
+                                                href="{{ route('servicedetails', $item->id) }}">{{ $item->name }}</a>
                                         </li>
                                     @endforeach
                                     @foreach ($pestcontrollfooter as $item)
-                                        <li><a href="{{ route('servicedetails', $item->id) }}">{{ $item->name }}</a>
+                                        <li><a
+                                                href="{{ route('servicedetails', $item->id) }}">{{ $item->name }}</a>
                                         </li>
                                     @endforeach
                                     @foreach ($manpowerfooter as $item)
-                                        <li><a href="{{ route('servicedetails', $item->id) }}">{{ $item->name }}</a>
+                                        <li><a
+                                                href="{{ route('servicedetails', $item->id) }}">{{ $item->name }}</a>
                                         </li>
                                     @endforeach
                                 </ul>
@@ -372,6 +377,17 @@
             </path>
         </svg>
     </div>
+    <div class="play-btn" style="position: fixed; right:30px; bottom: 160px; Z-index: 9">
+        <a href="tel:{{ $website->phone }}" target="_blank" rel="noopener" class="btn btn-danger" style="border-radius: 24px; height: 50px; width: 51px; display: flex; justify-content: center; align-items: center;">
+            <i class="fa-solid fa-phone-flip" style="font-size: 20px"></i>
+        </a>
+    </div>
+    <div class="play-btn" style="position: fixed; right:30px; bottom: 95px; Z-index: 9">
+        <a href="https://wa.me/{{ $website->phone }}" target="_blank" rel="noopener" class="btn btn-success" style="border-radius: 24px; height: 50px; width: 51px; display: flex; justify-content: center; align-items: center;">
+            <i class="fab fa-whatsapp fa-2x"></i>
+        </a>
+    </div>
+
     <script src="{{ asset('frontend/js/vendor/jquery-3.7.1.min.js') }}"></script>
     <script src="{{ asset('frontend/js/swiper-bundle.min.js') }}"></script>
     <script src="{{ asset('frontend/js/bootstrap.min.js') }}"></script>
