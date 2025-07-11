@@ -93,7 +93,7 @@
             </div>
         </div>
     </section>
-    <section class="space-top" id="service-sec">
+    {{-- <section class="space-top" id="service-sec">
         <div class="shape-mockup jump d-none d-xxl-block" data-top="15%" data-left="2%"><img
                 src="{{ asset('frontend/img/shape/tool_shape_1.png') }}" alt="shape" /></div>
         <div class="shape-mockup jump-reverse" data-top="10%" data-right="0%"><img
@@ -140,7 +140,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
     <div class="space-top"></div>
     <section class="space-top" id="service-sec">
         <div class="shape-mockup jump d-none d-xxl-block" data-top="15%" data-left="2%"><img
@@ -262,7 +262,7 @@
                     <div class="box-content">
                         <div class="media-body">
                             <h3 class="box-title">{{ $item->title }}</h3>
-                            <p class="box-text">{{ $item->service }}</p>
+                            <p class="box-text">{{ $item->cleaning->name }}</p>
                         </div>
                         <a href="{{ asset('image/portfolio/' . $item->img) }}" class="icon-btn popup-image">
                             <i class="far fa-plus"></i>

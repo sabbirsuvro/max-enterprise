@@ -89,7 +89,7 @@
                     <a href="{{ route('cleaningmanage') }}">
                         <div class="parent-icon"><i class='bx bx-home-alt'></i>
                         </div>
-                        <div class="menu-title">Service Manage</div>
+                        <div class="menu-title">Service/Blog Manage</div>
                     </a>
                 </li>
                 <li>

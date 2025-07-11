@@ -21,7 +21,7 @@
                                 <select name="type" id="type" class="form-control">
                                     <option value="" disabled>Choose Type...</option>
                                     <option value="cleaning_service">Cleaning Service</option>
-                                    <option value="pestcontrol_service">Pest Control</option>
+                                    {{-- <option value="pestcontrol_service">Pest Control</option> --}}
                                     <option value="manpower_service">Manpower Service</option>
                                     <option value="bLog">Blog</option>
                                 </select>

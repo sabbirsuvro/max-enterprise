@@ -24,9 +24,9 @@
                                     <option value="cleaning_service"
                                         {{ ($cleaning->type ?? '') == 'cleaning_service' ? 'selected' : '' }}>Cleaning
                                         Service</option>
-                                    <option value="pestcontrol_service"
+                                    {{-- <option value="pestcontrol_service"
                                         {{ ($cleaning->type ?? '') == 'pestcontrol_service' ? 'selected' : '' }}>Pest
-                                        Control</option>
+                                        Control</option> --}}
                                     <option value="manpower_service"
                                         {{ ($cleaning->type ?? '') == 'manpower_service' ? 'selected' : '' }}>Manpower
                                         Service</option>

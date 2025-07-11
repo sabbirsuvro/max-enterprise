@@ -6,15 +6,17 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     @php
         $cleaning = App\Models\Cleaning::where('type', 'cleaning_service')->get();
-        $pestcontroll = App\Models\Cleaning::where('type', 'pestcontrol_service')->get();
+        // $pestcontroll = App\Models\Cleaning::where('type', 'pestcontrol_service')->get();
+        // $cleaning = App\Models\Cleaning::whereIn('type', ['cleaning_service', 'pestcontrol_service'])->get();
+
         $manpower = App\Models\Cleaning::where('type', 'manpower_service')->get();
         $website = App\Models\Website::first();
         $codepush = App\Models\Codepush::first();
         $notice = App\Models\Notice::latest()->first();
 
-        $cleaningfooter = App\Models\Cleaning::where('type', 'cleaning_service')->latest()->take(2)->get();
-        $pestcontrollfooter = App\Models\Cleaning::where('type', 'pestcontrol_service')->latest()->take(2)->get();
-        $manpowerfooter = App\Models\Cleaning::where('type', 'manpower_service')->latest()->take(2)->get();
+        $cleaningfooter = App\Models\Cleaning::where('type', 'cleaning_service')->latest()->take(3)->get();
+        // $pestcontrollfooter = App\Models\Cleaning::where('type', 'pestcontrol_service')->latest()->take(2)->get();
+        $manpowerfooter = App\Models\Cleaning::where('type', 'manpower_service')->latest()->take(3)->get();
         $product = App\Models\Product::all();
     @endphp
     <title>{{ $website->name }}</title>
@@ -102,7 +104,7 @@
 
                         </ul>
                     </li>
-                    <li class="menu-item-has-children">
+                    {{-- <li class="menu-item-has-children">
                         <a href="{{ route('pestcontroll') }}">Pest Control</a>
                         <ul class="sub-menu">
                             @foreach ($pestcontroll as $item)
@@ -110,7 +112,7 @@
                             @endforeach
 
                         </ul>
-                    </li>
+                    </li> --}}
                     <li class="menu-item-has-children">
                         <a href="{{ route('manpower') }}">Manpower Supply</a>
                         <ul class="sub-menu">
@@ -120,9 +122,11 @@
 
                         </ul>
                     </li>
-                    <li>
-                        <a href="{{ route('blog') }}">Blog</a>
-                    </li>
+                    <li> <a href="{{ route('blog') }}">Blog</a></li>
+                    <li> <a href="{{ route('career') }}">Career</a></li>
+                    <li> <a href="{{ route('testimonial') }}">Testimonial</a></li>
+                    <li> <a href="{{ route('video') }}">Project Video</a></li>
+                    <li> <a href="{{ route('portfolio') }}">Portfolio</a></li>
                     <li><a href="{{ route('contact') }}">Contact</a></li>
                 </ul>
             </div>
@@ -193,7 +197,7 @@
 
                                         </ul>
                                     </li>
-                                    <li class="menu-item-has-children">
+                                    {{-- <li class="menu-item-has-children">
                                         <a href="{{ route('pestcontroll') }}">Pest Controll</a>
                                         <ul class="sub-menu">
                                             @foreach ($pestcontroll as $item)
@@ -203,7 +207,7 @@
                                             @endforeach
 
                                         </ul>
-                                    </li>
+                                    </li> --}}
                                     <li class="menu-item-has-children">
                                         <a href="{{ route('manpower') }}">Manpower Supply</a>
                                         <ul class="sub-menu">
@@ -226,6 +230,8 @@
 
                                         </ul>
                                     </li>
+                                    <li><a href="{{ route('blog') }}">Blog</a></li>
+
 
                                 </ul>
                             </nav>
@@ -329,11 +335,11 @@
                                                 href="{{ route('servicedetails', $item->id) }}">{{ $item->name }}</a>
                                         </li>
                                     @endforeach
-                                    @foreach ($pestcontrollfooter as $item)
+                                    {{-- @foreach ($pestcontrollfooter as $item)
                                         <li><a
                                                 href="{{ route('servicedetails', $item->id) }}">{{ $item->name }}</a>
                                         </li>
-                                    @endforeach
+                                    @endforeach --}}
                                     @foreach ($manpowerfooter as $item)
                                         <li><a
                                                 href="{{ route('servicedetails', $item->id) }}">{{ $item->name }}</a>
@@ -379,12 +385,12 @@
     </div>
     <div class="play-btn" style="position: fixed; right:30px; bottom: 160px; Z-index: 9">
         <a href="tel:{{ $website->phone }}" target="_blank" rel="noopener" class="btn btn-danger" style="border-radius: 24px; height: 50px; width: 51px; display: flex; justify-content: center; align-items: center;">
-            <i class="fa-solid fa-phone-flip" style="font-size: 20px"></i>
+            <i class="fa-solid fa-phone-flip" style="font-size: 20px; background: none;"></i>
         </a>
     </div>
     <div class="play-btn" style="position: fixed; right:30px; bottom: 95px; Z-index: 9">
         <a href="https://wa.me/{{ $website->phone }}" target="_blank" rel="noopener" class="btn btn-success" style="border-radius: 24px; height: 50px; width: 51px; display: flex; justify-content: center; align-items: center;">
-            <i class="fab fa-whatsapp fa-2x"></i>
+            <i class="fab fa-whatsapp fa-2x" style="background: none;"></i>
         </a>
     </div>
 

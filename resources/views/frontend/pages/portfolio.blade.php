@@ -83,7 +83,7 @@
                             <div class="box-content">
                                 <div class="media-body">
                                     <h3 class="box-title" style="color: #fff">{{ $item->title }}</h3>
-                                    <p class="box-text" style="color: #fff">{{ $item->service }}</p>
+                                    <p class="box-text" style="color: #fff">{{ $item->cleaning->name }}</p>
                                     <a href="{{ asset('image/portfolio/' . $item->img) }}" class="icon-btn popup-image">
                                         <i class="far fa-plus"></i>
                                     </a>
